@@ -12,6 +12,7 @@ interface Configuration extends WebpackConfig {
 
 const isDev = process.env.NODE_ENV !== "production";
 const config: Configuration = {
+  devtool: isDev ? "cheap-module-source-map" : "source-map",
   mode: isDev ? "development" : "production",
   devServer: {
     port: 3000,
@@ -21,12 +22,14 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
+    assetModuleFilename: "static/[hash][name][ext]",
   },
 
   module: {
     rules: [
       {
         test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
         use: "babel-loader",
       },
       {
@@ -36,6 +39,11 @@ const config: Configuration = {
       {
         test: /\.(png|jpg)$/,
         type: "asset/resource",
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ["@svgr/webpack"],
       },
     ],
   },
@@ -47,9 +55,6 @@ const config: Configuration = {
     isDev && new ReactRefreshWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({
       async: false,
-      // eslint: {
-      //   files: "./src/**/*.{ts,tsx,js,jsx}",
-      // },
     }),
   ].filter(Boolean),
   resolve: {

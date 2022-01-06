@@ -6,5 +6,11 @@
   "extends": ["airbnb", "airbnb/hooks", "airbnb-typescript", "prettier"],
   "plugins": ["prettier"],
   "rules": { "prettier/prettier": "warn", "react/react-in-jsx-scope": "off" },
-  "ignorePatterns": ["webpack.config.ts"]
+  "ignorePatterns": [
+    //
+    "webpack.config.ts",
+    "jest.config.js",
+    "fileTransformer.ts",
+    "setEnvVars.js"
+  ]
 }
