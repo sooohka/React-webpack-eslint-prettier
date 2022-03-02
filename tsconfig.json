@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "esModuleInterop": true,
     "jsx": "react-jsx",
-
     "lib": ["DOM", "ESNext"],
     "skipLibCheck": true,
     "strict": true,
     "target": "ES5",
     "noEmit": true,
+    "baseUrl": "./",
     "paths": {
-      "@Components/*": ["components/*"]
+      "@Components/*": ["src/components/*"]
     }
   },
   "include": ["src/**/*"],
